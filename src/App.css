@@ -1,5 +1,46 @@
 .App {
   text-align: center;
+  font-size: 18px;
+}
+input{
+  font-size: 1rem;
+}
+/* TODO */
+.todo-list{
+  font-size: 1rem;
+}
+.todo-item{
+  margin: 1rem 8rem;
+  background-color: #e8f3fa;
+  display: flex;
+  }
+.todo-text{
+  padding: 0.5rem;
+}
+.not-done{
+  background-color: bisque;
+}
+
+/* SPINNER */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* center of the screen */
+}
+
+.spinner {
+  border: 8px solid #f3f3f3; /* white circle */
+  border-top: 8px solid #3498db; /* rotating part */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 0.25s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 
