@@ -14,8 +14,10 @@ function App() {
     if (storedTodos) {
       setTodos(storedTodos);
     }
-    const timer = setTimeout(()=>{setIsLoaded(true);},1000);
-    return ()=>clearTimeout(timer);
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   // Update local storage whenever TODOs change
@@ -54,20 +56,20 @@ function App() {
     setTodos(updatetTask);
   };
   //is Loaded
- if (!isLoaded) {
-  return (
-    <div className="spinner-container">
-      <div className="spinner"></div>
-    </div>
-  );
-}
+  if (!isLoaded) {
+    return (
+      <div className="spinner-container">
+        <div className="spinner"></div>
+      </div>
+    );
+  }
   ////////////////////////////////////
 
   return (
     <div className="App">
-      <h1>ToDo App</h1>
-      <Form text={text} onSubmit={submitTodo} setText={setText}/>
-      <List todos={todos} deleteTodo={deleteTodo} toggleTask={toggleTask}/>
+      <div className='header'>ToDo App</div>
+      <Form  text={text} onSubmit={submitTodo} setText={setText} />
+      <List todos={todos} deleteTodo={deleteTodo} toggleTask={toggleTask} />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 export default function Form({onSubmit, text, setText}) {
   return (
-    <form onSubmit={onSubmit}>
+    <div className="form-container">
+    <form className="form-element" onSubmit={onSubmit}>
       <input
         type="text"
         placeholder="Add a new task"
@@ -11,5 +12,6 @@ export default function Form({onSubmit, text, setText}) {
         Submit
       </button>
     </form>
+    </div>
   );
 }
