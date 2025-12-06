@@ -10,7 +10,20 @@
   margin: 0;
   padding: 0.2rem;
 }
-
+.delete-all{
+  background-color:  rgb(211, 181, 181);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0.3rem 0 2rem 0;
+  width: fit-content;
+  padding: 0.5rem 2rem;
+  border-radius: 1rem;
+  border: none;
+}
+.no-tasks-yet{
+  font-size: 2rem;
+  color: gray;
+}
 /* TODO */
 .todo-list {
   font-size: 1rem;
@@ -20,34 +33,64 @@
 }
 .todo-item {
   margin: 1rem 0;
-  width: 70%;
-  background-color: #d38f8f;
-  display: flex;
+  padding: 1rem;
+  width: 80%;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 0.1rem solid rgb(129, 211, 125);
 }
 .todo-text {
-  padding: 0.5rem;
+  font-size: 1.2rem;
+  text-align: left;
+  max-width: 15rem;
+  white-space: normal;
+  word-wrap: break-word;
+  height: auto;
 }
 .not-done {
-  background-color: bisque;
+  background-color: rgb(237, 237, 237);
+  border: 0.1rem solid gray;
+}
+.icon-complete {
+  font-size: 1.5rem;
+  color: green;
+}
+.incomplete{
+  color:grey
+}
+.delete-el {
+  font-size: 1.5rem;
+  color: rgb(124, 78, 78);
+}
+.icon-list {
+  font-size: 1.5rem;
+  margin: 0.5rem;
 }
 /* FORM */
 .form-container {
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
-input {
-  border: none;
-}
-.form-container input {
+.todo-textarea {
+  width: 20rem;
+  min-height: 2rem;
   font-size: 1.5rem;
-  padding: 0.2rem 1rem;
-  margin: 1rem;
+  padding: 0.4rem 1rem;
+  margin: 1rem 0;
   border-radius: 1rem;
-  border-color: none;
   font-style: oblique;
   text-align: center;
   background-color: #e1edf5;
+  border: none;
+  resize: none;
+  overflow: hidden;
+  line-height: 1.4rem;
 }
 
 .submit-btn {
@@ -56,9 +99,13 @@ input {
   font-weight: 500;
   margin: 0.3rem 0 2rem 0;
   width: fit-content;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2rem;
   border-radius: 1rem;
   border: none;
+}
+.submit-delete-container{
+  display: flex;
+  justify-content: space-between;
 }
 /* SPINNER */
 .spinner-container {

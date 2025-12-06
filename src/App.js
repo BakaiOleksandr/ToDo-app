@@ -3,6 +3,7 @@ import {v4 as uuidv4} from 'uuid';
 import './App.css';
 import List from './components/List';
 import Form from './components/Form';
+import FilterTasks from './components/FilterTasks';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -35,7 +36,6 @@ function App() {
     };
     setTodos([...todos, newTask]);
     setText('');
-    console.log(newTask);
   };
 
   //Submit
@@ -55,6 +55,11 @@ function App() {
     );
     setTodos(updatetTask);
   };
+  const deleteAllTasks = () => {
+    localStorage.removeItem('todos');
+    setTodos([]);
+    setText('');
+  };
   //is Loaded
   if (!isLoaded) {
     return (
@@ -63,12 +68,22 @@ function App() {
       </div>
     );
   }
+  const getIncompletedTasks = () => todos.filter((el) => !el.isComplete).length;
   ////////////////////////////////////
 
   return (
     <div className="App">
-      <div className='header'>ToDo App</div>
-      <Form  text={text} onSubmit={submitTodo} setText={setText} />
+      <div className="header">ToDo App</div>
+      <Form
+        todos={todos}
+        text={text}
+        onSubmit={submitTodo}
+        setText={setText}
+        deleteAllTasks={deleteAllTasks}
+      />
+      {todos.length > 0 && (
+        <FilterTasks getIncompletedTasks={getIncompletedTasks} />
+      )}
       <List todos={todos} deleteTodo={deleteTodo} toggleTask={toggleTask} />
     </div>
   );
