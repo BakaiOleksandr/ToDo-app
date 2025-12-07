@@ -1,8 +1,12 @@
-import {useRef} from 'react';
+import {useRef, useEffect} from 'react';
 import DeleteAllBtn from './DeleteAllBtn';
-export default function Form({onSubmit, text, setText, deleteAllTasks, todos}) {
+export default function Form({onSubmit, text, setText, todos, showQuestion}) {
   const textareaRef = useRef(null);
-
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  }, []);
   const handleSubmit = (e) => {
     onSubmit(e);
     if (textareaRef.current) {
@@ -15,6 +19,7 @@ export default function Form({onSubmit, text, setText, deleteAllTasks, todos}) {
     e.target.style.height = 'auto';
     e.target.style.height = e.target.scrollHeight + 'px';
   };
+
   return (
     <div className="form-container">
       <form className="form-element" onSubmit={handleSubmit}>
@@ -27,11 +32,13 @@ export default function Form({onSubmit, text, setText, deleteAllTasks, todos}) {
           value={text}
           onChange={handleTextarea}
         />
-        <div className='submit-delete-container'>
+        <div className="submit-delete-container">
           <button type="submit" className="submit-btn">
             Submit
           </button>
-          {todos.length > 0 && <DeleteAllBtn onClick={deleteAllTasks} />}
+          {todos.length > 0 && (
+            <DeleteAllBtn onClick={() => showQuestion(null)} />
+          )}
         </div>
       </form>
     </div>

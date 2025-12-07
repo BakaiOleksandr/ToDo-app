@@ -4,7 +4,7 @@ import {RiFileList3Line} from 'react-icons/ri';
 import {AiOutlineFileDone} from 'react-icons/ai';
 import {IoMdDoneAll} from 'react-icons/io';
 
-export default function List({todos, deleteTodo, toggleTask}) {
+export default function List({todos, showQuestion, toggleTask}) {
   return (
     <div className="todo-list">
       {todos.length === 0 ? (
@@ -15,16 +15,17 @@ export default function List({todos, deleteTodo, toggleTask}) {
             key={el.id}
             className={`todo-item ${!el.isComplete && 'not-done'}`}
           >
+            <MdDeleteForever
+              className="delete-el"
+              onClick={() => showQuestion(el.id)}
+            />
+
+            <div className="todo-text">{el.text}</div>
             {!el.isComplete ? (
               <RiFileList3Line className="icon-list" />
             ) : (
               <AiOutlineFileDone className="icon-list" />
             )}
-            <div className="todo-text">{el.text}</div>
-            <MdDeleteForever
-              className="delete-el"
-              onClick={() => deleteTodo(el.id)}
-            />
             {!el.isComplete ? (
               <MdOutlineDone
                 className="icon-complete incomplete"

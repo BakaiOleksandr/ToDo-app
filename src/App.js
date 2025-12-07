@@ -4,11 +4,14 @@ import './App.css';
 import List from './components/List';
 import Form from './components/Form';
 import FilterTasks from './components/FilterTasks';
+import Question from './components/Question';
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [text, setText] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
+  const [show, setShow] = useState(false);
+  const [idTask, setIdTask] = useState(null);
   // Load TODOs from local storage on app startup
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem('todos'));
@@ -55,6 +58,7 @@ function App() {
     );
     setTodos(updatetTask);
   };
+  //deleteAllTasks
   const deleteAllTasks = () => {
     localStorage.removeItem('todos');
     setTodos([]);
@@ -68,23 +72,39 @@ function App() {
       </div>
     );
   }
-  const getIncompletedTasks = () => todos.filter((el) => !el.isComplete).length;
+  const getIncompletedTasks = () => todos.filter((el) => el.isComplete).length;
+  //Question
+  const showQuestion = (i) => {
+    setIdTask(i);
+    setShow(true);
+  };
+  const onCancel = () => {
+    setShow(false);
+    setIdTask(null);
+  };
+  const onConfirm = () => {
+    idTask ? deleteTodo(idTask) : deleteAllTasks();
+    setShow(false);
+    setIdTask(null);
+  };
   ////////////////////////////////////
 
   return (
     <div className="App">
       <div className="header">ToDo App</div>
+      {show && <Question confirm={onConfirm} cancel={onCancel} />}
       <Form
         todos={todos}
         text={text}
         onSubmit={submitTodo}
         setText={setText}
         deleteAllTasks={deleteAllTasks}
+        showQuestion={showQuestion}
       />
       {todos.length > 0 && (
         <FilterTasks getIncompletedTasks={getIncompletedTasks} />
       )}
-      <List todos={todos} deleteTodo={deleteTodo} toggleTask={toggleTask} />
+      <List todos={todos} showQuestion={showQuestion} toggleTask={toggleTask} />
     </div>
   );
 }
